@@ -1,0 +1,27 @@
+<VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:noNamespaceSchemaLocation="data/vast.xsd">
+<Ad id="1">
+<InLine>
+<AdSystem version="2.0">VAG</AdSystem>
+<AdTitle>
+<![CDATA[ ]]>
+</AdTitle>
+<Impression>
+<![CDATA[ ]]>
+</Impression>
+<Creatives>
+<Creative id="1083162/406011" AdID="1083162">
+<Linear>
+<Duration>00:00:{{ adv_dur }}</Duration>
+<MediaFiles>
+<MediaFile delivery="progressive" type="text/html" height="404" width="540" apiFramework="MRAID">
+<![CDATA[
+{{ adv_url }}
+]]>
+</MediaFile>
+</MediaFiles>
+</Linear>
+</Creative>
+</Creatives>
+</InLine>
+</Ad>
+</VAST>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Тестирование рекламы</title>
+    <!-- Bootstrap -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <style type="text/css">
+        .invisible {
+            display: none;    
+        }
+    </style>
+  </head>
+  <body>
+
+
+    <div class="container">
+      <!-- Тут заддаём параметры РЗ -->
+      <div class="row">
+        <div class="col-md-3">
+          <h2>Параметры</h2>
+              <form method="POST" role="form" class="form-horizontal">
+                <div class="form-group">
+
+                  <label>Платформа</label>
+                  <select class="form-control" id="sel1" name="platform">
+                    <option>Web</option>
+                    <option>Mobile</option>
+                    <option>Web WOW-roll</option>
+                  </select>
+
+                  <br>
+                  <label id="slot_select_label">Слот</label>
+                  <select class="form-control" id="slot_select" name="slot">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                  </select>
+
+                  <br>
+                  <label id="xml_link_label">Ссылка на VAST:</label>
+                  <input id="xml_link" type="text" class="form-control" name="vast_url"  placeholder = "то, что предоставили партнёры">
+
+                  <label id="duration_input_label">Продолжительность:</label>
+                  <input id="duration_input" type="number" class="form-control" name="duration" placeholder = "продолжительность (сек.)">
+
+                  <label id="xml_name_label">Имя для XML:</label>
+                  {% if platform == "Mobile" %}
+                  <input id="xml_name" type="text" class="form-control" name="xml_name" placeholder = "XML name" value="mraid_*_2016MON">
+                  {% elif platform == "Web WOW-roll" %}
+                  <input id="xml_name" type="text" class="form-control" name="xml_name" placeholder = "XML name" value="vast_*_2016MON">
+                  {% endif %}
+                </div>
+                <button type="submit" class="btn btn-default"> Получить XML</button>
+              </form>
+            <br>
+            <br>
+            <p> <a href="https://redmine.ivi.ru/projects/advtest/issues?query_id=539"  target="_blank">Свободные слоты</a>
+            <p> <a href="http://visionlatest.lg.ivi.ru/?platform=browser#/video/content/52821/details"  target="_blank"> Улучшайзер Демо-3 (тесты для телеков, 52821) </a>
+            <p> <a href = "https://www.iab.com/insights/vast-2-0-xml-samples-for-testing/"  target="_blank">Стандарты VAST</a>
+            <p> <a href = "https://www.ivi.ru/embeds/video/?id=7029&app_version=340&adr_order_id=725058"  target="_blank">Новый embed</a>
+            <p> <a href = "https://www.ivi.ru/video/player/?id=7029&app_version=340&adr_order_id=725058"  target="_blank">Старый embed</a>
+        </div>
+        <div class="col-md-9">
+          <h2>Результат</h2>
+          {% if platform == "Mobile" %}
+            <h3>Платформа: {{ platform }} </h3>
+            <h3>Продолжительность: {{ duration }} </h3>
+            <h3>Боевой РМ: {{ test_placement }}  </h3>
+          {% elif platform == "Web" %}
+            <h3>Платформа: {{ platform }} </h3>
+            <h3>Размещение: {{ test_order }} </h3>
+            <h3>Номер слота: slot{{ slot }} </h3>
+          {% elif platform == "Web WOW-roll" %}
+            <h3>Платформа: {{ platform }} </h3>
+            <h3>Размещение: {{ test_placement }} </h3>
+          {% else %}
+              <h1>No data</h1>
+          {% endif %}
+       </div>
+        <hr>
+    </div> 
+    </div> <!-- /container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/js/bootstrap.js"></script>
+        <script>
+        $(document).ready(function(){
+          hide_elem();
+          $('#sel1').change(hide_elem);  
+        });
+        // логика появления контроллов
+        function hide_elem(){
+          var selected_text = $( "#sel1 option:selected" ).text();  
+          if (selected_text == 'Web'){
+            $('#slot_select').fadeIn(400);
+            $('#slot_select_label').fadeIn(400);
+            $('#duration_input').fadeOut(600);
+            $('#duration_input_label').fadeOut(600);
+            $('#xml_name').fadeOut(600);
+            $('#xml_name_label').fadeOut(600);
+            $('#xml_link').fadeOut(600);
+            $('#xml_link_label').fadeOut(600);
+          }else if (selected_text == 'Mobile') {
+            $('#slot_select').fadeOut(600);
+            $('#slot_select_label').fadeOut(600);
+            $('#duration_input').fadeIn(400);
+            $('#duration_input_label').fadeIn(400);
+            $('#xml_name').fadeIn(400);
+            $('#xml_name_label').fadeIn(400);
+            $('#xml_link').fadeIn(400);
+            $('#xml_link_label').fadeIn(400);
+          }else if (selected_text == 'Web WOW-roll') {
+            $('#slot_select').fadeOut(600);
+            $('#slot_select_label').fadeOut(600);
+            $('#duration_input').fadeOut(600);
+            $('#duration_input_label').fadeOut(600);
+            $('#xml_name').fadeIn(400);
+            $('#xml_name_label').fadeIn(400);
+            $('#xml_link').fadeIn(400);
+            $('#xml_link_label').fadeIn(400);
+          }
+        }
+    </script>
+  </body>
+</html>

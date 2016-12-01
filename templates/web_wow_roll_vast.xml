@@ -1,0 +1,37 @@
+<VAST xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:noNamespaceSchemaLocation="data/vast.xsd">
+<Ad id="wrapper4">
+<Wrapper>
+<AdSystem version="2.0"/>
+<VASTAdTagURI>
+<![CDATA[
+{{ adv_url }}
+]]>
+</VASTAdTagURI>
+<Impression>
+<![CDATA[ ]]>
+</Impression>
+<Creatives>
+<Creative AdID="wrapper3">
+<Linear>
+<TrackingEvents>
+<Tracking event="complete">
+<![CDATA[ ]]>
+</Tracking>
+<Tracking event="start">
+<![CDATA[ ]]>
+</Tracking>
+</TrackingEvents>
+<VideoClicks>
+<ClickTracking>
+<![CDATA[ ]]>
+</ClickTracking>
+</VideoClicks>
+</Linear>
+</Creative>
+</Creatives>
+<Extensions>
+<Extension type="creativeType" id="wow"/>
+</Extensions>
+</Wrapper>
+</Ad>
+</VAST>
